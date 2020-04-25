@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 
 export default class AnswerChoice extends Component {
     render() {
-      console.log(this.props)
         let { choice, handleChoiceClick, canClick } = this.props;
         let bg;
         if(!canClick && choice.correct == "false"){
@@ -17,7 +16,6 @@ export default class AnswerChoice extends Component {
         } else {
           bg = ''
         }
-        console.log('bg ', bg)
         return (
           <Card onClick={() => handleChoiceClick(choice.correct)} className={`${bg} choice-card`}>
             <CardContent>

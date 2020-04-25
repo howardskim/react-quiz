@@ -39,16 +39,17 @@ class App extends Component{
   }
   handleChoiceClick = (boolean) => {
     let { canClick } = this.state;
+    if(!canClick) return;
     if(boolean === "false"){
       this.setState({
         canClick: false
       })
-      // setTimeout(() => {
-      //   this.setState({
-      //     // canClick: true
-      //     questionNumber: this.state.questionNumber + 1,
-      //   });
-      // }, 2500)
+      setTimeout(() => {
+        this.setState({
+          canClick: true,
+          questionNumber: this.state.questionNumber + 1,
+        });
+      }, 2500)
     } else {
       if(boolean === "true" && canClick){
         this.setState({
@@ -63,11 +64,6 @@ class App extends Component{
       });
       return;
     }
-
-
-    // this.setState({
-    //   questionNumber: this.state.questionNumber + 1
-    // })
   }
   handleReset = () => {
     this.setState({
@@ -77,7 +73,6 @@ class App extends Component{
     });
   }
   render(){
-    console.log(this.state.canClick)
     let { numberOfCorrectAnswers, questionNumber, selected } = this.state;
     return (
       <React.Fragment>

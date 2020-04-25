@@ -4,10 +4,6 @@
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
-body{
-  /* background: rgb(200, 235, 235); */
-
-}
 html{
   background: linear-gradient(to bottom, rgb(6, 202, 237), #def7ec);
   height: 100%;
