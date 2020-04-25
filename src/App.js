@@ -13,14 +13,15 @@ class App extends Component{
       questions: data,
       selected: 1,
       questionNumber: 0,
-      numberOfCorrectAnswers: 0
+      numberOfCorrectAnswers: 0,
+      canClick: true
     }
   };
   handleStartClick = () => {
     this.setState({selected: 2})
   }
   handleRender = () => {
-    let { selected, questions, questionNumber, numberOfCorrectAnswers } = this.state;
+    let { selected, questions, questionNumber, numberOfCorrectAnswers, canClick } = this.state;
     switch(selected){
       case 1:
         return <Intro handleStartClick={this.handleStartClick} />;
@@ -29,6 +30,7 @@ class App extends Component{
           <QuestionArea
             handleChoiceClick={this.handleChoiceClick}
             question={questions[questionNumber]}
+            canClick={canClick}
           />
         );
       case 3:
@@ -36,10 +38,24 @@ class App extends Component{
     }
   }
   handleChoiceClick = (boolean) => {
-    if(boolean === "true"){
+    let { canClick } = this.state;
+    if(boolean === "false"){
       this.setState({
-        numberOfCorrectAnswers: this.state.numberOfCorrectAnswers + 1
-      });
+        canClick: false
+      })
+      // setTimeout(() => {
+      //   this.setState({
+      //     // canClick: true
+      //     questionNumber: this.state.questionNumber + 1,
+      //   });
+      // }, 2500)
+    } else {
+      if(boolean === "true" && canClick){
+        this.setState({
+          numberOfCorrectAnswers: this.state.numberOfCorrectAnswers + 1,
+          questionNumber: this.state.questionNumber + 1,
+        });
+      }
     }
     if(this.state.questionNumber === this.state.questions.length - 1){
       this.setState({
@@ -47,9 +63,11 @@ class App extends Component{
       });
       return;
     }
-    this.setState({
-      questionNumber: this.state.questionNumber + 1
-    })
+
+
+    // this.setState({
+    //   questionNumber: this.state.questionNumber + 1
+    // })
   }
   handleReset = () => {
     this.setState({
@@ -59,6 +77,7 @@ class App extends Component{
     });
   }
   render(){
+    console.log(this.state.canClick)
     let { numberOfCorrectAnswers, questionNumber, selected } = this.state;
     return (
       <React.Fragment>
